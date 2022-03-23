@@ -20,14 +20,20 @@ class MenuController extends Controller
     {
         return view('admin.menu.add', [
             'title' => 'Thêm danh mục mới',
-            'menus' => $this->menuService->getParent()
+            'menus' => $this->menuService->getParent(0)
         ]);
     }
     public function store(CreateFormRequest $request)
     {
 
         $result = $this->menuService->create($request);
-
         return redirect()->back();
+    }
+    public function index()
+    {
+        return view('admin.menu.list', [
+            'title' => 'danh sách danh mục mới nhất ',
+            'menus' =>  $this->menuService->getAll()
+        ]);
     }
 }
